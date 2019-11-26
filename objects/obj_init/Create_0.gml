@@ -1,6 +1,6 @@
 #macro GRAVITY 0.2
 
-#macro PLAYER_WIDTH_HALF 32
+#macro PLAYER_WIDTH_HALF 12
 
 #macro VIEW_H 960
 #macro VIEW_H_HALF 480

@@ -21,6 +21,10 @@ if(static_time > 0) static_time--;
 if(abs(h_force_speed) < 1) h_force_speed = 0;
 else h_force_speed *= .8;
 
+// sprite control
+if(h_input == 1) image_xscale = 1;
+else if(h_input == -1) image_xscale = -1;
+
 // check collision
 var i;
 for(i = 0; i < abs(h_speed); i++)

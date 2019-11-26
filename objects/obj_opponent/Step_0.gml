@@ -1,19 +1,24 @@
 /// @description Movement logic
 
 // make input decision
-if(decision_time < 1)
+if(decision_time < 1 && static_time < 1 && place_meeting(x, y + 1, obj_solid))
 {
 	// find the hole
 	ds_list_clear(hole_list);
 	ds_list_clear(solid_list);
 	var i, j;
-	for(i = 0; i < VIEW_W; i += 48)
+	for(i = 0; i < VIEW_W; i += 64)
 	{
 		if(!collision_point(i, y + 8, obj_solid, false, false))
 		{
-			ds_list_add(hole_list, i - VIEW_W);
-			ds_list_add(hole_list, i);
-			ds_list_add(hole_list, i + VIEW_W);
+			// find the middle point of the hole
+			var i_l = i, i_r = i, i_m = i;
+			while(!collision_point(i_l - 1, y + 8, obj_solid, false, false) && i_l > 0) i_l--;
+			while(!collision_point(i_r + 1, y + 8, obj_solid, false, false) && i_r < VIEW_W) i_r++;
+			i_m = (i_l + i_r) * .5;
+			ds_list_add(hole_list, i_m - VIEW_W);
+			ds_list_add(hole_list, i_m);
+			ds_list_add(hole_list, i_m + VIEW_W);
 		}
 	}
 	
@@ -66,9 +71,13 @@ v_speed += GRAVITY;
 // other arguments
 if(static_time > 0) static_time--;
 if(decision_time > 0) decision_time--;
-else decision_time = 50;
+else decision_time = 30;
 if(abs(h_force_speed) < 1) h_force_speed = 0;
 else h_force_speed *= .8;
+
+// sprite control
+if(h_input == 1) image_xscale = 1;
+else if(h_input == -1) image_xscale = -1;
 
 // check collision
 var i;
