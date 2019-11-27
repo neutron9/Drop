@@ -76,8 +76,11 @@ if(abs(h_force_speed) < 1) h_force_speed = 0;
 else h_force_speed *= .8;
 
 // sprite control
+image_xscale_previous = image_xscale;
 if(h_input == 1) image_xscale = 1;
 else if(h_input == -1) image_xscale = -1;
+if(h_input == 0 || image_xscale_previous != image_xscale) angle_arg = 0;
+else angle_arg = clamp(angle_arg + 15, 0, 180);
 
 // check collision
 var i;

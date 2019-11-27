@@ -1,1 +1,1 @@
-draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, c_white, 1);
+draw_sprite_ext(sprite_index, image_index, x, y + lengthdir_y(PLAYER_WIDTH_HALF, dsin(angle_arg) * 30), image_xscale, image_yscale, dsin(angle_arg) * 30 * image_xscale, c_white, 1);
